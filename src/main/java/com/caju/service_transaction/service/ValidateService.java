@@ -17,7 +17,8 @@ public class ValidateService {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public boolean validate(Long accountId, String pinOrCvv, boolean isPin) {
+    public boolean validate(Long accountId, String pinOrCvv) {
+        var isPin = isPin(pinOrCvv);
         return accountRepository.findById(accountId)
                 .map(accountSecurity -> {
                     String storedHash = isPin ? accountSecurity.getHashedPin() : accountSecurity.getHashedCvv();
@@ -25,6 +26,10 @@ public class ValidateService {
                 })
                 .orElse(false);
 
+    }
+
+    public boolean isPin(String pinOrCvv) {
+        return pinOrCvv.length() == 4 || pinOrCvv.length() == 6;
     }
 
 }

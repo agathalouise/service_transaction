@@ -15,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Map;
-import java.util.UUID;
 
 import static com.caju.service_transaction.enums.Category.CASH;
 
@@ -34,7 +33,7 @@ public class TransactionService {
     public TransactionResponse processTransaction(TransactionRequest request) {
 
         // Validate PIN or CVV
-        if (!validateService.validate(request.getAccountId(), request.getPinOrCvv(), request.isPin())) {
+        if (!validateService.validate(request.getAccountId(), request.getPinOrCvv())) {
             log.info("pin or cvv invalid");
             return new TransactionResponse("07");
         }
