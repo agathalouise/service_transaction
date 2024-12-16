@@ -50,7 +50,7 @@ public class TransactionService {
     }
 
 
-    private boolean deductBalance(Wallet wallet, BigDecimal amount, Category category, TransactionRequest request) {
+    protected boolean deductBalance(Wallet wallet, BigDecimal amount, Category category, TransactionRequest request) {
         BigDecimal categoryBalance = getCategoryBalance(wallet, category);
 
         if (categoryBalance.compareTo(amount) >= 0) {
@@ -97,7 +97,6 @@ public class TransactionService {
         });
 
         saveTransaction(wallet, request);
-        walletRepository.save(wallet);
     }
 
     private void saveTransaction(Wallet wallet, TransactionRequest request) {
