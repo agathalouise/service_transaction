@@ -7,15 +7,15 @@ import org.springframework.stereotype.Service;
 public class MerchantService {
     public Category mapToCategory(String mcc, String merchant) {
         var merchantUC = merchant.toUpperCase();
-        if (merchantUC.contains("UBER TRIP") || merchantUC.contains("BILHETEUNICO") ) {
+        if (merchantUC.contains("UBER TRIP") || merchantUC.contains("BILHETEUNICO")) {
             return Category.TRANSPORT;
         } else if (merchantUC.contains("PADARIA") || merchantUC.contains("IFOOD") || merchantUC.contains("UBER EATS")) {
             return Category.MEAL;
-        } else if (merchantUC.contains("MERCADO") ||  merchantUC.contains("MERCEARIA")) {
+        } else if (merchantUC.contains("MERCADO") || merchantUC.contains("MERCEARIA")) {
             return Category.FOOD;
-        } else if (merchantUC.contains("LIVRARIA") ||  merchantUC.contains("CINEMA")) {
-        return Category.CULTURE;
-    }
+        } else if (merchantUC.contains("LIVRARIA") || merchantUC.contains("CINEMA")) {
+            return Category.CULTURE;
+        }
 
         return switch (mcc) {
             case "5411", "5412" -> Category.FOOD;
