@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.mockito.Mockito.*;
 
 public class TransactionServiceTest {
@@ -103,8 +104,6 @@ public class TransactionServiceTest {
         when(walletRepository.findWalletForUpdate(anyLong()))
                 .thenReturn(Optional.of(testWallet));
 
-        boolean result = transactionService.deductBalance(testWallet, new BigDecimal("50"), Category.FOOD, testRequest);
-
-        assertEquals(false, result);
+        assertFalse(transactionService.deductBalance(testWallet, new BigDecimal("50"), Category.FOOD, testRequest));
     }
 }
